@@ -16,3 +16,10 @@ This project builds a movie recommendation system like Netflix.
 
 ##  Next
 - Collaborative Filtering
+
+##  Sample Output
+
+Top 10 Recommended Movies:
+- Shawshank Redemption ⭐ 4.4
+- Star Wars ⭐ 4.3
+- Godfather ⭐ 4.3
