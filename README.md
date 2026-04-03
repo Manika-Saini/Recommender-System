@@ -23,3 +23,18 @@ Top 10 Recommended Movies:
 - Shawshank Redemption ⭐ 4.4
 - Star Wars ⭐ 4.3
 - Godfather ⭐ 4.3
+
+##  Phase 3: Collaborative Filtering
+
+* Built user-item matrix
+* Used cosine similarity to find similar users
+* Implemented weighted recommendation system
+* Personalized movie recommendations
+
+###  Improvement
+
+Used weighted scoring:
+score = similarity × rating
+
+This improves recommendation quality by prioritizing highly similar users.
+
