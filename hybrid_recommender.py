@@ -1,15 +1,16 @@
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
-
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ratings=pd.read_csv(
-    "../data/ml-100k/u.data",
+    os.path.join(BASE_DIR, "data/ml-100k/u.data"),
     sep="\t",
     names=["user_id","movie_id","rating","timestamp"]
 )
 
 movies=pd.read_csv(
-    "../data/ml-100k/u.item",
+    os.path.join(BASE_DIR,"data/ml-100k/u.item"),
     sep="|",
     encoding="latin-1",
     names=[
@@ -66,7 +67,7 @@ def hybrid_recommend(user_id,n=5):
                     collab_scores[movie]+=sim_score*rating
     content_scores={}
     for movie in watched:
-        idx=movies[movies["title"].str.strip()].index
+        idx_list=movies[movies["title"].str.strip()==movie.strip()].index
         if len(idx_list)==0:
             continue
         idx=idx_list[0]
@@ -82,8 +83,8 @@ def hybrid_recommend(user_id,n=5):
         final_scores[movie]=(
             0.6*collab_scores.get(movie,0)+0.4*content_scores.get(movie,0)
         )
-        sorted_movies=sorted(final_scores.items(),key=lambda x: x[1],reverse=True)
-        return [movie for movie,score in sorted_movies[:n]]
+    sorted_movies=sorted(final_scores.items(),key=lambda x: x[1],reverse=True)
+    return [movie for movie,score in sorted_movies[:n]]
     
 user_id = 1  
 try:
